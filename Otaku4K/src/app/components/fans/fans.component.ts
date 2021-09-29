@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {AppService} from '../app.service';
 import {MatTableDataSource} from '@angular/material/table';
@@ -14,7 +14,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./fans.component.scss']
 })
 
-export class FansComponent implements OnInit {
+export class FansComponent implements OnInit, OnDestroy {
   fan: any;
   fans: any;
   dataSource: any;
@@ -39,14 +39,7 @@ export class FansComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.sub.add(
-      this.appService.getFans().subscribe((data) => {
-        this.fans = data;
-        this.dataSource = new MatTableDataSource(this.fans);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      })
-    );
+    this.receiveFans();
   }
 
   addFan(): void {
@@ -54,6 +47,16 @@ export class FansComponent implements OnInit {
       this.appService.addFan(this.form.value).subscribe(() => {
         alert('Fan ajouté : ' + this.form.value.nom);
         // recuperation list
+      })
+    );
+  }
+  receiveFans(): void{
+    this.sub.add(
+      this.appService.getFans().subscribe((data) => {
+        this.fans = data;
+        this.dataSource = new MatTableDataSource(this.fans);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
       })
     );
   }

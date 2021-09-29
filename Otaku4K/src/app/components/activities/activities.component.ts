@@ -1,18 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {Subscription} from 'rxjs';
 import {AppService} from '../app.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-activities',
   templateUrl: './activities.component.html',
-  providers: [AppService],
+  providers: [AppService, MatSnackBar],
   styleUrls: ['./activities.component.scss']
 })
-export class ActivitiesComponent implements OnInit {
-
+export class ActivitiesComponent implements OnInit, OnDestroy {
   activities: any;
   sub = new Subscription();
-  constructor(private readonly appService: AppService){
+  constructor(private appService: AppService, private snackBar: MatSnackBar){
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
@@ -21,7 +21,11 @@ export class ActivitiesComponent implements OnInit {
   ngOnInit(): void {
     this.sub.add(
       this.appService.getActivities().subscribe((data) => {
-        this.activities = data;
+        if (typeof data === 'string'){
+          this.snackBar.open(data, 'Ok');
+        } else {
+          this.activities = data;
+        }
       })
     );
   }
