@@ -1,0 +1,24 @@
+<div *ngIf="singer" class="member">
+  <p>
+    Nom : {{singer.nom}}
+  </p>
+  <p>
+    Prénom : {{singer.prenom}}
+  </p>
+  <p>
+    Alias : {{singer.alias}}
+  </p>
+  <p>
+    Rôles :
+  </p>
+  <li >
+    {{singer.role}}
+  </li>
+  <p>
+    Présentation : {{singer.presentation}}
+  </p>
+</div>
+<div *ngIf="!singer">
+  <p>Le chanteur n'a pas pu être récupéré.</p>
+</div>
+

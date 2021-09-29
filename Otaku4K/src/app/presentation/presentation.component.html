@@ -1,0 +1,11 @@
+<div class="singers" *ngIf="singers">
+  <div *ngFor="let singer of singers">
+    <a routerLink="/presentation/{{singer.nom}}" routerLinkActive="active">
+      {{singer.nom}}
+      {{singer.prenom}}
+    </a>
+  </div>
+</div>
+<div *ngIf="!singers">
+  <p>Un problème est survenu lors de la récupération des membres du groupe.</p>
+</div>

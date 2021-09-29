@@ -1,0 +1,72 @@
+<div *ngIf="fans">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="nom">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
+      <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="prenom">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Prénom </th>
+      <td mat-cell *matCellDef="let element"> {{element.prenom}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="ville">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Ville </th>
+      <td mat-cell *matCellDef="let element"> {{element.ville}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="pays">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Pays </th>
+      <td mat-cell *matCellDef="let element"> {{element.pays}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+
+<p *ngIf="!fans">
+  Un problème est survenu lors de la récupération des fans.
+</p>
+
+<div class="formulaire">
+  <h2>Ajout d'un fan</h2>
+  <form [formGroup]="form" (ngSubmit)="addFan()">
+    <div>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Nom</mat-label>
+        <input matInput placeholder="Nom.." [formControlName]="'nom'" type="text">
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Prénom</mat-label>
+        <input matInput placeholder="Prénom.." [formControlName]="'prenom'" type="text">
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Ville</mat-label>
+        <input matInput placeholder="Ville.." [formControlName]="'ville'" type="text">
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Pays</mat-label>
+        <input matInput placeholder="Pays.." [formControlName]="'pays'" type="text">
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Enregistrer</button>
+  </form>
+</div>
+
