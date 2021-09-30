@@ -31,9 +31,11 @@
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
 
-<p *ngIf="!fans">
-  Un problème est survenu lors de la récupération des fans.
-</p>
+<div>
+  <p *ngIf="!fans">
+    Un problème est survenu lors de la récupération des fans.
+  </p>
+</div>
 
 <div class="formulaire">
   <h2>Ajout d'un fan</h2>

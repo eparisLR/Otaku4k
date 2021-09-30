@@ -1,24 +1,10 @@
-<div *ngIf="singer" class="member">
-  <p>
-    Nom : {{singer.nom}}
-  </p>
-  <p>
-    Prénom : {{singer.prenom}}
-  </p>
-  <p>
-    Alias : {{singer.alias}}
-  </p>
-  <p>
-    Rôles :
-  </p>
-  <li >
-    {{singer.role}}
-  </li>
-  <p>
-    Présentation : {{singer.presentation}}
-  </p>
-</div>
-<div *ngIf="!singer">
-  <p>Le chanteur n'a pas pu être récupéré.</p>
-</div>
+<mat-card *ngIf="singer">
+  <mat-card-title>{{singer.nom}} {{singer.prenom}} ({{singer.alias}})</mat-card-title>
+  <mat-card-content>
+    <p>Rôle :</p>
+    <p>{{singer.role}}</p>
+  </mat-card-content>
+  <img mat-card-image [src]="'assets/' +  singer.image" style="width:60%; height:auto"/>
+  <mat-card-footer style="padding: 0 2vw 2vw 2vw">{{singer.presentation}}</mat-card-footer>
+</mat-card>
 

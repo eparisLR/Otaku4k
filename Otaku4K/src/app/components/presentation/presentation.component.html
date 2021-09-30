@@ -1,9 +1,6 @@
-<div class="singers" *ngIf="singers">
+<div class="singers" *ngIf="singers" fxLayout fxLayoutGap="5vw" style="margin: 2vh 2vh 0 2vh">
   <div *ngFor="let singer of singers">
-    <a routerLink="/presentation/{{singer.nom}}" routerLinkActive="active">
-      {{singer.nom}}
-      {{singer.prenom}}
-    </a>
+    <app-member [singer]="singer"></app-member>
   </div>
 </div>
 <div *ngIf="!singers">

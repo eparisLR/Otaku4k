@@ -1,5 +1,5 @@
 table{
-  width: 98.5vw;
+  width: 100%;
 }
 
 .mat-paginator-outer-container.mat-paginator-container{
@@ -8,9 +8,14 @@ table{
 
 .formulaire{
   text-align: center;
-  width: 100vw
+  width:100%;
 }
 
 .formulaire form > div {
   margin-bottom: 2vh;
+}
+
+div {
+  text-align: center;
+  width: 100%;
 }

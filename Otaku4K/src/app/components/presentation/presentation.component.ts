@@ -1,17 +1,18 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AppService} from '../app.service';
+import {AppService} from '../../app.service';
 import {Subscription} from 'rxjs';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Singer} from '../../models/singer.model';
 
 @Component({
   selector: 'app-presentation',
   templateUrl: './presentation.component.html',
-  providers: [AppService],
   styleUrls: ['./presentation.component.scss']
 })
 export class PresentationComponent implements OnInit, OnDestroy {
-  singers: any;
+  singers: Singer[] = [];
   sub = new Subscription();
-  constructor(private readonly appService: AppService) { }
+  constructor(private appService: AppService) { }
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
@@ -20,8 +21,7 @@ export class PresentationComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sub.add(
       this.appService.getSingers().subscribe((data) => {
-        this.singers = data;
-        console.log(this.singers);
+          this.singers = data;
       })
     );
   }

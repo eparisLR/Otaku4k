@@ -1,26 +1,25 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs';
-import {AppService} from '../app.service';
+import {AppService} from '../../app.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Fan} from '../../models/fan.model';
 
 
 @Component({
   selector: 'app-fans',
   templateUrl: './fans.component.html',
-  providers: [AppService],
   styleUrls: ['./fans.component.scss']
 })
 
 export class FansComponent implements OnInit, OnDestroy {
-  fan: any;
-  fans: any;
+  fans: Fan[] = [];
   dataSource: any;
   sub = new Subscription();
   displayedColumns: string[] = ['nom', 'prenom', 'ville', 'pays'];
-  C = new MatSort();
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
 
@@ -31,7 +30,7 @@ export class FansComponent implements OnInit, OnDestroy {
     pays: new FormControl('', Validators.required),
   });
 
-  constructor(private readonly appService: AppService) {
+  constructor(private appService: AppService) {
   }
 
   ngOnDestroy(): void {
@@ -45,18 +44,22 @@ export class FansComponent implements OnInit, OnDestroy {
   addFan(): void {
     this.sub.add(
       this.appService.addFan(this.form.value).subscribe(() => {
-        alert('Fan ajouté : ' + this.form.value.nom);
-        // recuperation list
+        this.receiveFans();
       })
     );
   }
   receiveFans(): void{
     this.sub.add(
       this.appService.getFans().subscribe((data) => {
-        this.fans = data;
-        this.dataSource = new MatTableDataSource(this.fans);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
+          this.fans = data;
+          this.dataSource = new MatTableDataSource(this.fans);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+
+          this.form.controls.nom.setValue('');
+          this.form.controls.prenom.setValue('');
+          this.form.controls.ville.setValue('');
+          this.form.controls.pays.setValue('');
       })
     );
   }

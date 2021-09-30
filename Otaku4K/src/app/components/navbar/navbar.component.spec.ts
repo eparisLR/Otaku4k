@@ -22,4 +22,9 @@ describe('NavbarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should get an HTML Element', () => {
+    const link = fixture.debugElement.nativeElement.querySelector('.nav-tu');
+    expect(link).toBeTruthy();
+  });
 });

@@ -1,14 +1,12 @@
 <nav>
-  <ul>
-    <li>
-      <a routerLink="/" routerLinkActive="active">Otaku4K</a>
-    </li>
-    <li>
-      <a routerLink="/fans" routerLinkActive="active">Fans</a>
-    </li>
-    <li>
-      <a routerLink="/presentation" routerLinkActive="active">Présentation</a>
-    </li>
-  </ul>
+  <div fxLayout fxFlex>
+    <div routerLink="/" routerLinkActive="active" fxFlex fxLayoutAlign="center center" class="nav nav-tu">Otaku4K</div>
+
+    <div routerLink="/fans" routerLinkActive="active" fxFlex fxLayoutAlign="center center" class="nav">Fans</div>
+
+    <div routerLink="/presentation" routerLinkActive="active" fxFlex fxLayoutAlign="center center" class="nav">
+      Présentation
+    </div>
+  </div>
 </nav>
 

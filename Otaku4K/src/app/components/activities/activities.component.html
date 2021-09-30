@@ -1,14 +1,13 @@
-<div *ngIf="activities">
-  <div *ngFor="let activity of activities">
-    <blockquote>
-      {{activity.texte}}
-    </blockquote>
-    <p>
-      {{activity.date | date: 'short'}}
-    </p>
+<div *ngIf="activities" style="max-height: 100%" fxLayout fxLayoutGap="5vw">
+  <div class="activity" *ngFor="let activity of activities">
+    <mat-card>
+      <mat-card-content>{{activity.texte}}</mat-card-content>
+      <img mat-card-image [src]="'assets/' +  activity.image" style="width:60%; height:auto"/>
+      <mat-card-footer>{{activity.date | date: 'short'}}</mat-card-footer>
+    </mat-card>
   </div>
 </div>
 <div *ngIf="!activities">
-  <p>Désolé, le groupe n'a rien fait récemment.. </p>
+  <p data-tu="noactivity">Désolé, le groupe n'a rien fait récemment.. </p>
 </div>
 
